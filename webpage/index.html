@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>LOTOS GRILL</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:#000;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* 🔥 BRAZAS EN PRIMER PLANO */
+.ember{
+  position:fixed;
+  bottom:-10px;
+  width:6px;
+  height:6px;
+  background:orange;
+  border-radius:50%;
+  animation:floatUp 6s linear infinite;
+  opacity:0.7;
+  z-index:9999;
+  pointer-events:none;
+}
+
+/* ANIMACIÓN */
+@keyframes floatUp{
+  0%{
+    transform:translateY(0);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-100vh);
+    opacity:0;
+  }
+} 
+.logo-box{
+  width:160px;
+  height:160px;
+  margin:auto;
+  margin-bottom:20px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  background:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1600') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  z-index:1;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.hero-content{
+  z-index:2;
+}
+
+/* LOGO CORREGIDO */
+.logo-box{
+  width:300px;
+  height:300px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  margin-bottom:20px;
+  border-radius:20px;
+  padding:10px;
+}
+
+h1{
+  color:orange;
+  font-size:60px;
+  margin:0;
+}
+
+/* BOTONES PRO */
+button{
+  background:orange;
+  border:none;
+  padding:12px 22px;
+  margin:8px;
+  cursor:pointer;
+  font-weight:bold;
+  border-radius:30px;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+  background:#ff8c00;
+}
+
+/* GALERIA */
+.gallery{
+  display:flex;
+  overflow-x:auto;
+  gap:15px;
+  padding:20px;
+}
+
+.gallery img{
+  height:200px;
+  border-radius:15px;
+}
+
+/* SECCIONES */
+.section{
+  padding:60px;
+  text-align:center;
+}
+
+/* FORMULARIO */
+input,textarea{
+  width:80%;
+  max-width:500px;
+  padding:12px;
+  margin:8px;
+  border:none;
+  border-radius:10px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#25D366;
+  padding:15px 20px;
+  border-radius:50px;
+  color:white;
+  font-weight:bold;
+  text-decoration:none;
+  z-index:10000;
+}
+
+/* MAPA */
+iframe{
+  width:100%;
+  height:400px;
+  border:0;
+  border-radius:20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 BRAZAS -->
+<script>
+for(let i=0;i<40;i++){
+  let e=document.createElement("div");
+  e.className="ember";
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(3+Math.random()*5)+"s";
+  document.body.appendChild(e);
+}
+</script>
+
+<!-- HERO -->
+<div class="hero">
+<div class="overlay"></div>
+
+<div class="hero-content">
+
+<div class="logo-box">
+
+  <!-- LLAMA ROJA -->
+  <div class="flame"></div>
+
+  <!-- LOGO -->
+  <img src="logo-lotos.svg" style="
+  width:100%;
+  height:100%;
+  filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)) 
+          drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+">
+</div>
+
+<h1></h1>
+<p>BBQ • Tacos • Smoky Flavor</p>
+
+<button onclick="document.getElementById('menu').scrollIntoView()">
+VER MENÚ
+</button>
+
+<button onclick="window.open('https://www.google.com/maps?q=16.305347,-86.593245','_blank')">
+UBICACIÓN
+</button>
+
+<button onclick="window.open('https://wa.me/50432968225?text=Hola%20quiero%20reservar%20en%20LOTOS%20GRILL','_blank')">
+WHATSAPP
+</button>
+
+</div>
+</div>
+
+<!-- GALERÍA -->
+<div class="section" id="menu">
+<h2 style="color:orange;">MENÚ DESTACADO</h2>
+
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1565299585323-38174c4a6c4f">
+<img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
+<img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+</div>
+
+<button onclick="alert('Menú completo próximamente')">
+VER MENÚ COMPLETO
+</button>
+</div>
+
+<!-- RESERVAS -->
+<div class="section">
+<h2 style="color:orange;">RESERVAS</h2>
+
+<input placeholder="Nombre"><br>
+<input placeholder="Teléfono"><br>
+<input type="date"><br>
+<input type="time"><br>
+<textarea placeholder="Mensaje"></textarea><br>
+
+<button>RESERVAR</button>
+</div>
+
+<!-- LOTOS HOUSE -->
+<div class="section">
+
+<h2 style="color:orange;">LOTOS HOUSE</h2>
+
+<img 
+src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba"
+style="width:100%;max-width:800px;border-radius:20px;margin:20px auto;display:block;"
+>
+
+<p style="max-width:700px;margin:auto;">
+Hospedaje premium en West End, Roatán. Habitaciones modernas, ambiente tropical y la experiencia completa LOTOS junto al restaurante.
+</p>
+
+<button onclick="window.open('https://maps.app.goo.gl/ZxZzx95YxDpeJ71E8','_blank')">
+VER UBICACIÓN DEL HOTEL
+</button>
+
+</div>
+<!-- MAPA -->
+<div class="section">
+  <h2 style="color:orange;">UBICACIÓN</h2>
+
+  <section>
+    <h2></h2>
+    <iframe src="https://www.google.com/maps?q=Lotos+Grill+Roatan&output=embed"></iframe>
+</section>
+
+  <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=Roatan+Islas+de+la+Bahia+HN+Frente+a+canchas+de+basketball+34101+French+Harbour','_blank')">
+    ABRIR EN GOOGLE MAPS
+  </button>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a class="whatsapp"
+href="https://wa.me/50432968225?text=Hola%20quiero%20reservar%20en%20LOTOS%20GRILL"
+target="_blank">
+WhatsApp
+</a>
+
+</body>
+</html>
