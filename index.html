@@ -113,11 +113,40 @@ button:hover{
 }
 
 /* GALERIA */
-.gallery{
-  display:flex;
-  overflow-x:auto;
-  gap:15px;
-  padding:20px;
+/* 🍖 CONTENEDOR DEL MENÚ (CARRUSEL) */
+.gallery-container {
+  overflow: hidden; /* Esconde lo que sobresale */
+  width: 100%;
+  background: rgba(20, 20, 20, 0.5);
+  padding: 20px 0;
+  position: relative;
+}
+
+.gallery-track {
+  display: flex;
+  width: calc(250px * 12); /* Ajusta según el número de imágenes */
+  animation: scrollLateral 30s linear infinite; /* Movimiento continuo */
+}
+
+.gallery-track img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin: 0 10px;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.gallery-track img:hover {
+  transform: scale(1.1);
+  border: 2px solid orange;
+}
+
+/* Animación para el desplazamiento */
+@keyframes scrollLateral {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 6)); } /* Se mueve la mitad del total */
 }
 
 .gallery img{
@@ -161,6 +190,15 @@ iframe{
   height:400px;
   border:0;
   border-radius:20px;
+}
+
+footer {
+  padding: 40px;
+  background: #111;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+  border-top: 1px solid orange;
 }
 </style>
 </head>
@@ -220,11 +258,16 @@ WHATSAPP
 <div class="section" id="menu">
 <h2 style="color:orange;">MENÚ DESTACADO</h2>
 
-<div class="gallery">
-<img src="https://images.unsplash.com/photo-1565299585323-38174c4a6c4f">
-<img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
-<img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c">
-<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<div class="gallery-container">
+  <div class="gallery-track">
+    <img src="https://images.unsplash.com/photo-1565299585323-38174c4a6c4f">
+    <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
+    <img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c">
+    
+    <img src="https://images.unsplash.com/photo-1565299585323-38174c4a6c4f">
+    <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
+    <img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c">
+  </div>
 </div>
 
 <button onclick="alert('Menú completo próximamente')">
@@ -277,6 +320,10 @@ VER UBICACIÓN DEL HOTEL
     ABRIR EN GOOGLE MAPS
   </button>
 </div>
+<footer>
+  <p>&copy; 2026 LOTOS GRILL - Todos los derechos reservados. Mantenimiento Genius Grapich Solution +504 3396-9333</p>
+  <p>Roatán, Islas de la Bahía, Honduras.</p>
+</footer>
 
 <!-- WHATSAPP FLOAT -->
 <a class="whatsapp"
