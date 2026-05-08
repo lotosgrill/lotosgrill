@@ -3,248 +3,472 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>LOTOS GRILL</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <style>
-body{
+
+/* =========================================
+🔥 ESTILO GENERAL
+========================================= */
+
+*{
   margin:0;
-  font-family: Arial, Helvetica, sans-serif;
-  background:#000;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at bottom,
+    rgba(255,80,0,0.15),
+    transparent 35%),
+    linear-gradient(to bottom,#050505,#111);
+
   color:white;
   overflow-x:hidden;
 }
 
-/* 🔥 BRAZAS EN PRIMER PLANO */
-.ember{
+/* =========================================
+🔥 HUMO
+========================================= */
+
+.smoke{
   position:fixed;
-  bottom:-10px;
-  width:6px;
-  height:6px;
-  background:orange;
-  border-radius:50%;
-  animation:floatUp 6s linear infinite;
-  opacity:0.7;
-  z-index:9999;
+  bottom:-200px;
+  width:300px;
+  height:300px;
+
+  background:
+  radial-gradient(circle,
+  rgba(120,120,120,0.15) 0%,
+  rgba(80,80,80,0.05) 40%,
+  transparent 70%);
+
+  filter:blur(40px);
+
+  animation:smokeUp linear infinite;
+
   pointer-events:none;
+  z-index:1;
 }
 
-/* ANIMACIÓN */
-@keyframes floatUp{
+@keyframes smokeUp{
+
   0%{
-    transform:translateY(0);
-    opacity:1;
-  }
-  100%{
-    transform:translateY(-100vh);
+    transform:translateY(0) translateX(0) scale(1);
     opacity:0;
   }
-} 
-.logo-box{
-  width:160px;
-  height:160px;
-  margin:auto;
-  margin-bottom:20px;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
+  20%{
+    opacity:.35;
+  }
+
+  100%{
+    transform:translateY(-120vh)
+    translateX(100px)
+    scale(2.5);
+
+    opacity:0;
+  }
 }
 
-/* HERO */
+/* =========================================
+🔥 BRASAS
+========================================= */
+
+.ember{
+  position:fixed;
+  bottom:-20px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9999;
+
+  background:
+  radial-gradient(circle,
+  rgba(255,255,255,1) 0%,
+  rgba(255,220,120,1) 15%,
+  rgba(255,120,0,1) 40%,
+  rgba(255,40,0,.8) 70%,
+  transparent 100%);
+
+  box-shadow:
+  0 0 6px rgba(255,120,0,.9),
+  0 0 12px rgba(255,80,0,.7),
+  0 0 24px rgba(255,60,0,.4);
+
+  animation:
+  floatUp linear infinite,
+  flicker 1.8s ease-in-out infinite;
+}
+
+@keyframes floatUp{
+
+  0%{
+    transform:
+    translateY(0)
+    translateX(0)
+    scale(1)
+    rotate(0deg);
+
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    transform:
+    translateY(-120vh)
+    translateX(calc(-80px + 160px * var(--drift)))
+    scale(.2)
+    rotate(360deg);
+
+    opacity:0;
+  }
+}
+
+@keyframes flicker{
+
+  0%,100%{
+    filter:brightness(1);
+  }
+
+  50%{
+    filter:brightness(1.8);
+  }
+}
+
+/* =========================================
+🔥 HERO
+========================================= */
+
 .hero{
   height:100vh;
-  background:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1600') center/cover no-repeat;
+
+  background:
+  linear-gradient(rgba(0,0,0,.45),
+  rgba(0,0,0,.75)),
+
+  url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1600')
+  center/cover no-repeat;
+
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   position:relative;
+  overflow:hidden;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+  radial-gradient(circle at bottom,
+  rgba(255,100,0,0.25),
+  transparent 45%);
+
+  z-index:1;
 }
 
 .overlay{
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.45);
   z-index:1;
 }
 
 .hero-content{
   position:relative;
   z-index:2;
+  padding:20px;
 }
 
-.hero-content{
-  z-index:2;
-}
-
-/* LOGO CORREGIDO */
 .logo-box{
-  width:300px;
-  height:300px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  width:280px;
+  height:280px;
   margin:auto;
   margin-bottom:20px;
-  border-radius:20px;
-  padding:10px;
 }
 
-h1{
-  color:orange;
-  font-size:60px;
-  margin:0;
+.logo-box img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
 }
 
-/* BOTONES PRO */
+.hero p{
+  font-size:22px;
+  margin-top:10px;
+  color:#ddd;
+}
+
+/* =========================================
+🔥 BOTONES
+========================================= */
+
 button{
-  background:orange;
+  background:linear-gradient(45deg,#ff6600,#ff9500);
   border:none;
-  padding:12px 22px;
-  margin:8px;
+  padding:14px 26px;
+  margin:10px;
   cursor:pointer;
   font-weight:bold;
-  border-radius:30px;
+  border-radius:40px;
   transition:0.3s;
+  color:white;
+  font-size:15px;
+
+  box-shadow:
+  0 0 10px rgba(255,120,0,.4);
 }
 
 button:hover{
-  transform:scale(1.05);
-  background:#ff8c00;
+  transform:translateY(-3px) scale(1.03);
+
+  box-shadow:
+  0 0 20px rgba(255,120,0,.7);
 }
 
-/* GALERIA */
-/* 🍖 CONTENEDOR DEL MENÚ (CARRUSEL) */
-.gallery-container {
-  overflow: hidden; /* Esconde lo que sobresale */
-  width: 100%;
-  background: rgba(20, 20, 20, 0.5);
-  padding: 20px 0;
-  position: relative;
-}
+/* =========================================
+🔥 SECCIONES
+========================================= */
 
-.gallery-track {
-  display: flex;
-  width: calc(250px * 12); /* Ajusta según el número de imágenes */
-  animation: scrollLateral 30s linear infinite; /* Movimiento continuo */
-}
-
-.gallery-track img {
-  width: 250px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 15px;
-  margin: 0 10px;
-  flex-shrink: 0;
-  transition: transform 0.3s;
-}
-
-.gallery-track img:hover {
-  transform: scale(1.1);
-  border: 2px solid orange;
-}
-
-/* Animación para el desplazamiento */
-@keyframes scrollLateral {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-250px * 6)); } /* Se mueve la mitad del total */
-}
-
-.gallery img{
-  height:200px;
-  border-radius:15px;
-}
-
-/* SECCIONES */
 .section{
-  padding:60px;
+  padding:70px 20px;
   text-align:center;
 }
 
-/* FORMULARIO */
-input,textarea{
-  width:80%;
-  max-width:500px;
-  padding:12px;
-  margin:8px;
-  border:none;
-  border-radius:10px;
+.section h2{
+  color:orange;
+  margin-bottom:30px;
+  font-size:40px;
 }
 
-/* WHATSAPP */
+/* =========================================
+🔥 GALERÍA
+========================================= */
+
+.gallery-container{
+  overflow:hidden;
+  width:100%;
+  padding:20px 0;
+}
+
+.gallery-track{
+  display:flex;
+  width:max-content;
+
+  animation:scrollLateral 30s linear infinite;
+}
+
+.gallery-track img{
+  width:280px;
+  height:220px;
+  object-fit:cover;
+  border-radius:18px;
+  margin:0 12px;
+
+  transition:0.4s;
+}
+
+.gallery-track img:hover{
+  transform:scale(1.08);
+  border:2px solid orange;
+}
+
+@keyframes scrollLateral{
+
+  0%{
+    transform:translateX(0);
+  }
+
+  100%{
+    transform:translateX(-50%);
+  }
+}
+
+/* =========================================
+🔥 FORMULARIO
+========================================= */
+
+.form-box{
+  max-width:700px;
+  margin:auto;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:15px;
+  margin:10px 0;
+
+  border:none;
+  border-radius:14px;
+
+  background:#1a1a1a;
+  color:white;
+
+  font-size:16px;
+}
+
+textarea{
+  min-height:120px;
+}
+
+/* =========================================
+🔥 IMÁGENES
+========================================= */
+
+.main-img{
+  width:100%;
+  max-width:850px;
+  border-radius:24px;
+  margin:25px auto;
+  display:block;
+
+  box-shadow:
+  0 0 25px rgba(255,120,0,.15);
+}
+
+/* =========================================
+🔥 MAPA
+========================================= */
+
+iframe{
+  width:100%;
+  height:420px;
+  border:none;
+  border-radius:20px;
+}
+
+/* =========================================
+🔥 WHATSAPP
+========================================= */
+
 .whatsapp{
   position:fixed;
   right:20px;
   bottom:20px;
+
   background:#25D366;
-  padding:15px 20px;
+
+  padding:14px 22px;
+
   border-radius:50px;
+
   color:white;
   font-weight:bold;
   text-decoration:none;
+
   z-index:10000;
+
+  box-shadow:
+  0 0 20px rgba(37,211,102,.4);
 }
 
-/* MAPA */
-iframe{
-  width:100%;
-  height:400px;
-  border:0;
-  border-radius:20px;
+/* =========================================
+🔥 FOOTER
+========================================= */
+
+footer{
+  padding:30px;
+  background:#0b0b0b;
+  text-align:center;
+  border-top:1px solid rgba(255,140,0,.3);
+  color:#888;
 }
 
-footer {
-  padding: 20px;
-  background: #111;
-  text-align: center;
-  font-size: 14px;
-  color: #777;
-  border-top: 1px solid orange;
-}
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 BRAZAS -->
+<!-- =========================================
+🔥 EFECTOS
+========================================= -->
+
 <script>
-for(let i=0;i<40;i++){
+
+/* BRASAS */
+
+for(let i=0;i<80;i++){
+
   let e=document.createElement("div");
+
   e.className="ember";
+
+  let size=Math.random()*8+3;
+
+  e.style.width=size+"px";
+  e.style.height=size+"px";
+
   e.style.left=Math.random()*100+"vw";
-  e.style.animationDuration=(3+Math.random()*5)+"s";
+
+  e.style.animationDuration=
+  (4+Math.random()*6)+"s";
+
+  e.style.animationDelay=
+  Math.random()*5+"s";
+
+  e.style.setProperty(
+  '--drift',
+  Math.random()
+  );
+
   document.body.appendChild(e);
 }
+
+/* HUMO */
+
+for(let i=0;i<12;i++){
+
+  let s=document.createElement("div");
+
+  s.className="smoke";
+
+  s.style.left=Math.random()*100+"vw";
+
+  s.style.animationDuration=
+  (15+Math.random()*15)+"s";
+
+  s.style.animationDelay=
+  Math.random()*10+"s";
+
+  document.body.appendChild(s);
+}
+
 </script>
 
-<!-- HERO -->
+<!-- =========================================
+🔥 HERO
+========================================= -->
+
 <div class="hero">
+
 <div class="overlay"></div>
 
 <div class="hero-content">
 
 <div class="logo-box">
-
-  <!-- LLAMA ROJA -->
-  <div class="flame"></div>
-
-  <!-- LOGO -->
-  <img src="logo-lotos.svg" style="
-  width:100%;
-  height:100%;
-  filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)) 
-          drop-shadow(0 0 0px rgba(255, 255, 255, 0));
-">
+<img src="logo-lotos.svg">
 </div>
 
-<h1></h1>
 <p>BBQ • Tacos • Smoky Flavor</p>
 
-<button onclick="document.getElementById('menu').scrollIntoView()">
+<button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
 VER MENÚ
 </button>
 
-<button onclick="window.open('https://www.google.com/maps?q=16.305347,-86.593245','_blank')">
+<button onclick="window.open('https://www.google.com/maps/search/?api=1&query=Lotos+Grill+Roatan','_blank')">
 UBICACIÓN
 </button>
 
@@ -255,82 +479,171 @@ WHATSAPP
 </div>
 </div>
 
-<!-- GALERÍA -->
+<!-- =========================================
+🔥 MENÚ
+========================================= -->
+
 <div class="section" id="menu">
-<h2 style="color:orange;">MENÚ DESTACADO</h2>
+
+<h2>MENÚ DESTACADO</h2>
 
 <div class="gallery-container">
-  <div class="gallery-track">
-    <img src="https://images.unsplash.com/photo-1565299585323-38174c4a6c4f">
-    <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
-    <img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c">
-    
-    <img src="https://images.unsplash.com/photo-1565299585323-38174c4a6c4f">
-    <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
-    <img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c">
-  </div>
+
+<div class="gallery-track">
+
+<img src="https://images.unsplash.com/photo-1565299585323-38174c4a6c4f">
+
+<img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
+
+<img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c">
+
+<img src="https://images.unsplash.com/photo-1565299585323-38174c4a6c4f">
+
+<img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd">
+
+<img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c">
+
+</div>
 </div>
 
 <button onclick="alert('Menú completo próximamente')">
 VER MENÚ COMPLETO
 </button>
+
 </div>
 
-<!-- RESERVAS -->
+<!-- =========================================
+🔥 RESERVAS
+========================================= -->
+
 <div class="section">
-<h2 style="color:orange;">RESERVAS</h2>
 
-<input placeholder="Nombre"><br>
-<input placeholder="Teléfono"><br>
-<input type="date"><br>
-<input type="time"><br>
-<textarea placeholder="Mensaje"></textarea><br>
+<h2>RESERVAS</h2>
 
-<button>RESERVAR</button>
+<div class="form-box">
+
+<form action="https://formsubmit.co/lotosgrill2020@gmail.com" method="POST">
+
+<input type="text" name="nombre" placeholder="Nombre" required>
+
+<input type="tel" name="telefono" placeholder="Teléfono" required>
+
+<input type="date" name="fecha" required>
+
+<input type="time" name="hora" required>
+
+<textarea name="mensaje" placeholder="Mensaje"></textarea>
+
+<!-- CONFIGURACIÓN -->
+
+<input type="hidden" name="_captcha" value="false">
+
+<input type="hidden" name="_subject" value="Nueva Reserva - LOTOS GRILL">
+
+<input type="hidden" name="_template" value="table">
+
+<button type="submit">
+RESERVAR
+</button>
+
+</form>
+
+</div>
 </div>
 
-<!-- LOTOS HOUSE -->
+<!-- =========================================
+🔥 LOTOS HOUSE
+========================================= -->
+
 <div class="section">
 
-<h2 style="color:orange;">LOTOS HOUSE</h2>
+<h2>LOTOS HOUSE</h2>
 
-<img 
+<img
+class="main-img"
 src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba"
-style="width:100%;max-width:800px;border-radius:20px;margin:20px auto;display:block;"
 >
 
-<p style="max-width:700px;margin:auto;">
-Hospedaje premium en West End, Roatán. Habitaciones modernas, ambiente tropical y la experiencia completa LOTOS junto al restaurante.
+<p style="
+max-width:750px;
+margin:auto;
+font-size:18px;
+line-height:1.8;
+color:#ddd;
+">
+
+Hospedaje premium en West End, Roatán.
+Habitaciones modernas, ambiente tropical
+y la experiencia completa LOTOS junto al restaurante.
+
 </p>
 
-<button onclick="window.open('https://maps.app.goo.gl/ZxZzx95YxDpeJ71E8','_blank')">
+<button onclick="window.open('https://maps.app.goo.gl/frmJ9FVeupvoLpfB7','_blank')">
 VER UBICACIÓN DEL HOTEL
 </button>
 
 </div>
-<!-- MAPA -->
+
+<!-- =========================================
+🔥 MAPA
+========================================= -->
+
 <div class="section">
-  <h2 style="color:orange;">UBICACIÓN</h2>
 
-  <section>
-    <h2></h2>
-    <iframe src="https://www.google.com/maps?q=Lotos+Grill+Roatan&output=embed"></iframe>
-</section>
+<h2>UBICACIÓN</h2>
 
-  <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=Roatan+Islas+de+la+Bahia+HN+Frente+a+canchas+de+basketball+34101+French+Harbour','_blank')">
-    ABRIR EN GOOGLE MAPS
-  </button>
+<iframe
+src="https://www.google.com/maps?q=Lotos+Grill+Roatan&output=embed">
+</iframe>
+
+<br><br>
+
+<button onclick="window.open('https://www.google.com/maps/search/?api=1&query=Lotos+Grill+Roatan','_blank')">
+
+ABRIR EN GOOGLE MAPS
+
+</button>
+
 </div>
+
+<!-- =========================================
+🔥 FOOTER
+========================================= -->
+
 <footer>
-  <p>&copy; 2026 LOTOS GRILL - Todos los derechos reservados. Mantenimiento Genius Grapich Solution +504 3396-9333</p>
-  <p>Roatán, Islas de la Bahía, Honduras.</p>
+
+<p>
+© 2026 LOTOS GRILL - Todos los derechos reservados.
+</p>
+
+<br>
+
+<p>
+Mantenimiento Genius Grapich Solution
++504 3396-9333
+</p>
+
+<br>
+
+<p>
+Roatán, Islas de la Bahía, Honduras.
+</p>
+
 </footer>
 
-<!-- WHATSAPP FLOAT -->
-<a class="whatsapp"
+<!-- =========================================
+🔥 WHATSAPP FLOAT
+========================================= -->
+
+<a
+class="whatsapp"
+
 href="https://wa.me/50432968225?text=Hola%20quiero%20reservar%20en%20LOTOS%20GRILL"
+
 target="_blank">
+
 WhatsApp
+
 </a>
 
 </body>
